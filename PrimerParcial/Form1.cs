@@ -18,91 +18,11 @@ namespace PrimerParcial
         public Form1()
         {
             InitializeComponent();
-            Inicializar();
         }
 
         private void Form1_Load(object sender, EventArgs e)
         {
 
-        }
-
-        private void Inicializar()
-        {
-            // ... lo que ya tenías (eventos, combos, etc.)
-
-            // 🚨 Solo para pruebas: cargar algunos clientes
-            try
-            {
-                var c1 = new ClientePrincipiante
-                {
-                    NumeroDeSocio = 1,
-                    Nombre = "Juan",
-                    Apellido = "Pérez",
-                    DNI = "12345678",
-                    Cuota = 10000m
-                };
-                _manager.AgregarCliente(c1);
-
-                var c2 = new ClienteIntermedio
-                {
-                    NumeroDeSocio = 2,
-                    Nombre = "María",
-                    Apellido = "Gómez",
-                    DNI = "23456789",
-                    Cuota = 12000m
-                };
-                _manager.AgregarCliente(c2);
-
-                var c3 = new ClienteAvanzado
-                {
-                    NumeroDeSocio = 3,
-                    Nombre = "Carlos",
-                    Apellido = "Rodríguez",
-                    DNI = "34567890",
-                    Cuota = 15000m
-                };
-                _manager.AgregarCliente(c3);
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Error al cargar clientes de prueba: " + ex.Message);
-            }
-
-            // Refrescar grillas para ver los clientes cargados
-            RefrescarGrillasDesdeDatos();
-        }
-
-        private void RefreshColumns()
-        {
-            // Si ya las definiste en diseñador, estos checks evitan duplicados
-            if (dgrGrilla1.Columns.Count == 0)
-            {
-                dgrGrilla1.Columns.Add("NroDeSocio", "Nro de socio");
-                dgrGrilla1.Columns.Add("Nombre", "Nombre");
-                dgrGrilla1.Columns.Add("Apellido", "Apellido");
-                dgrGrilla1.Columns.Add("DNI", "DNI");
-                dgrGrilla1.Columns.Add("Cuota", "Cuota");
-            }
-
-            if (dgrGrilla2.Columns.Count == 0)
-            {
-                dgrGrilla2.Columns.Add("Codigo", "Codigo");
-                dgrGrilla2.Columns.Add("FechaDeOtorgamiento", "Fecha de otorgamiento");
-                dgrGrilla2.Columns.Add("Importe", "Importe");
-            }
-
-            if (dgrResumen.Columns.Count == 0)
-            {
-                dgrResumen.Columns.Add("NroDeSocioResumen", "Nro de socio");
-                dgrResumen.Columns.Add("NombreResumen", "Nombre");
-                dgrResumen.Columns.Add("ApellidoResumen", "Apellido");
-                dgrResumen.Columns.Add("DNIResumen", "DNI");
-                dgrResumen.Columns.Add("CuotaResumen", "Cuota");
-                dgrResumen.Columns.Add("ImporteDeDescuentoResumen", "Importe de descuento");
-                dgrResumen.Columns.Add("ImporteDeDescuentoPorTipoDeClienteResumen", "Importe de descuento por tipo de cliente");
-                dgrResumen.Columns.Add("MembresiaResumen", "Membresia");
-                dgrResumen.Columns.Add("NetoAAbonarResumen", "Neto a abonar");
-            }
         }
 
         // ---------- BOTONES DE CLIENTE ----------
@@ -237,11 +157,6 @@ namespace PrimerParcial
                     RefrescarGrillasDesdeDatos();
                     LimpiarCamposMembresia();
                 }
-                else
-                {
-                    // Si no fue agregada, probablemente el manager disparó el evento porque excedía cuota neta.
-                    // El evento ya mostró el MessageBox; no hacemos nada más.
-                }
             }
             catch (Exception ex)
             {
@@ -321,7 +236,7 @@ namespace PrimerParcial
             txtApellido.Text = "";
             txtDNI.Text = "";
             txtCuota.Text = "";
-            // cmbTipoDeCliente.SelectedIndex = 0; // opcional
+            cmbTipoDeCliente.SelectedIndex = 0;
         }
 
         private void LimpiarCamposMembresia()
@@ -370,7 +285,7 @@ namespace PrimerParcial
             }
             catch
             {
-                // proteger contra excepciones en click
+                
             }
         }
     }

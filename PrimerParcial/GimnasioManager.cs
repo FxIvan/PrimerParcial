@@ -6,7 +6,6 @@ using System.Threading.Tasks;
 
 namespace PrimerParcial
 {
-    // EventArgs personalizado para cuando la membresía supera la cuota neta
     public class MembresiaExcedeCuotaEventArgs : EventArgs
     {
         public decimal CuotaMensual { get; }
@@ -21,7 +20,7 @@ namespace PrimerParcial
 
     public class GimnasioManager
     {
-        // Listas en memoria (no persistente)
+        // Listas en memoria (cuando se termina de ejecutar el codigo, la data se elimina)
         public List<Cliente> Clientes { get; } = new List<Cliente>();
         public List<Membresia> Membresias { get; } = new List<Membresia>();
 
@@ -89,7 +88,7 @@ namespace PrimerParcial
             // Calcular cuota neta = cuota - descuento por tipo
             decimal cuotaNeta = cliente.Cuota - cliente.ImporteDescuentoPorTipo();
 
-            // Si importe > cuotaNeta -> disparar evento y NO asignar (según enunciado: se debe desencadenar evento)
+            // Si importe > cuotaNeta -> disparar evento y NO asignar
             if (importe > cuotaNeta)
             {
                 MembresiaExcedeCuota?.Invoke(this, new MembresiaExcedeCuotaEventArgs(cliente.Cuota, importe));
@@ -102,7 +101,7 @@ namespace PrimerParcial
             cliente.Membresia = m;
         }
 
-        // Quitar membresía de un cliente (no elimina la membresía del repositorio necesariamente)
+        // Quitar membresía de un cliente
         public void QuitarMembresiaDeCliente(int nroSocio)
         {
             var cliente = Clientes.FirstOrDefault(c => c.NumeroDeSocio == nroSocio);

@@ -14,7 +14,7 @@ namespace PrimerParcial
         public string Apellido { get; set; }
         public string DNI { get; set; }
         public decimal Cuota { get; set; }
-        public Membresia Membresia { get; set; } // asociación (puede ser null)
+        public Membresia Membresia { get; set; }
 
         // Devuelve el importe del descuento por tipo de cliente
         public abstract decimal ImporteDescuentoPorTipo();
